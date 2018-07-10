@@ -113,7 +113,7 @@
         // Layer 2. The number of units of the last layer should correspond
         // to the number of classes we want to predict.
         tf.layers.dense({
-          units: 2,
+          units: this.numClasses,
           kernelInitializer: 'varianceScaling',
           useBias: false,
           activation: 'softmax'

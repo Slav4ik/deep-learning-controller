@@ -6,7 +6,7 @@
 let video;
 var stream, imageCapture;
 let dataForFetch = {
-    4: [], 6: []
+    2: [], 4: [], 5: [], 6: [], 8: []
 };
 
 const tsParams = {
@@ -80,7 +80,29 @@ window.sendInterval = setInterval( () => {
 
 function takePhoto(img, label) {
     const batchedImage = takeCapture();
-    const tsLabel = label === 4 ? 0 : 1;
+
+    var tsLabel;
+
+    switch(label) {
+        case 2:
+            tsLabel = 0
+            break;
+        case 4:
+            tsLabel = 1
+            break;
+        case 5:
+            tsLabel = 2
+            break;
+        case 6:
+            tsLabel = 3
+            break;
+        case 8:
+            tsLabel = 4
+            break;
+        default:
+            tsLabel = 2
+    }
+
     modelOperator.addExample(batchedImage, tsLabel);
     imageCapture.takePhoto()
         .then(blob => {
@@ -322,7 +344,7 @@ function updateTrainingStatus(value) {
     document.querySelector('#train-status').textContent = value;
 }
 
-window.modelOperator = new ModelOperator(2);
+window.modelOperator = new ModelOperator(5);
 modelOperator.updateTrainingStatus = updateTrainingStatus;
 
 /* just call */

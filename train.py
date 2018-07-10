@@ -41,7 +41,7 @@ def create_model(learning_rate=0.0001, nn_unit_pairs=((100, 0.2),)):
                 continue
             fc_model.add(keras.layers.Dropout(name="dropout_%d" % units, rate=drop_rate))
 
-    fc_model.add(keras.layers.Dense(name="output_softmax", units=2,
+    fc_model.add(keras.layers.Dense(name="output_softmax", units=5,
                                     activation="softmax",
                                     kernel_initializer="VarianceScaling",
                                     use_bias=False))
