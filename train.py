@@ -20,7 +20,7 @@ flags.DEFINE_integer("epochs", 10, "Number of epochs")
 flags.DEFINE_float("batch_frac", 0.1, "The fraction of training examples to consider as batch."
                    "For instance, 0.1 will divide the training to 10 batches")
 flags.DEFINE_boolean("draw_plot", False, "Whether to draw a plot at the end")
-flags.DEFINE_boolean("export_js", False, "Whether to export to a tenorflow.js model")
+flags.DEFINE_boolean("export_js", True, "Whether to export to a tenorflow.js model")
 FLAGS = flags.FLAGS
 
 
