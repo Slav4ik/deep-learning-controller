@@ -1,9 +1,13 @@
 import os
+import subprocess
+
 from flask import Flask, render_template, url_for, send_from_directory
 from flask import jsonify
 from flask import request
 from flask_cors import CORS
 from flask_uploads import UploadSet, configure_uploads, IMAGES
+
+import train as train_service
 from boto import create_file_in_s3, create_file_in_local
 import numpy as np
 
@@ -21,13 +25,22 @@ CORS(app, automatic_options=True)
 def space_invaders():
     return render_template('%s.html' % "spaceinvaders")
 
+
 @app.route('/favicon.ico')
 def favicon():
-    return send_from_directory(os.path.join(app.root_path, 'static'), 'favicon.ico', mimetype='image/vnd.microsoft.icon')
+    return send_from_directory(os.path.join(app.root_path, 'static'), 'favicon.ico',
+                               mimetype='image/vnd.microsoft.icon')
+
 
 @app.route('/thanks')
 def thanks():
     return "thanks"
+
+
+@app.route('/train')
+def train():
+    subprocess.call(["{}/.venv/bin/python3".format(os.getcwd()), "train.py"])
+    return "Trained.\nExported the model into a tensoflow.js format."
 
 
 @app.route('/upload', methods=['POST'], )
@@ -71,13 +84,13 @@ def save_mobilenet_predictions():
 
     # Save X
     xs_2d = np.reshape(xs['data'], (xs_rows, xs_columns))
-    xs_data_file = open('data/xs.csv','ab')
+    xs_data_file = open('data/xs.csv', 'ab')
     np.savetxt(xs_data_file, xs_2d, delimiter=",")
     xs_data_file.close()
 
     # Save Y
     ys_2d = np.reshape(ys['data'], (ys_rows, ys_columns))
-    ys_data_file = open('data/ys.csv','ab')
+    ys_data_file = open('data/ys.csv', 'ab')
     np.savetxt(ys_data_file, ys_2d, delimiter=",")
     ys_data_file.close()
     return jsonify({"path": url_for('thanks')})
