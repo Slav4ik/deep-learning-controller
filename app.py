@@ -1,4 +1,6 @@
 import os
+import subprocess
+
 from flask import Flask, render_template, url_for, send_from_directory
 from flask import jsonify
 from flask import request
@@ -37,7 +39,7 @@ def thanks():
 
 @app.route('/train')
 def train():
-    train_service.main(None)
+    subprocess.call(["{}/.venv/bin/python3".format(os.getcwd()), "train.py"])
     return "Trained.\nExported the model into a tensoflow.js format."
 
 
