@@ -170,7 +170,7 @@
   }
 
   async loadPreTrainedModel() {
-        const trained_model = await tf.loadModel('static/spaceinvaders/model/model.json')
+        const trained_model = await tf.loadModel('static/spaceinvaders/model_new/model_1.json')
         const output_layer = trained_model.getLayer('output_softmax');
         this.model = tf.model({
             inputs: trained_model.inputs,

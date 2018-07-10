@@ -111,15 +111,20 @@
 
         <div class="panel joystick-panel">
 
+            <div class="panel-cell panel-cell-left panel-cell-fill" style="width: 100%">
+                <span id="probabilityMonitor"></span>
+            </div><!-- ./panel-cell -->
+
             <div class="panel-row panel-row-top">
 
-                <div class="panel-cell panel-cell-left panel-cell-fill" style="width: 100%">
-                    <span id="probabilityMonitor"></span>
+                <div class="panel-cell panel-cell-left panel-cell-fill">
+                    <div class="thumb-box">
+                    </div>
                 </div><!-- ./panel-cell -->
 
                 <div class="panel-cell panel-cell-center panel-cell-fill">
                     <div class="thumb-box">
-                        <div class="thumb-box-outer">
+                        <div class="thumb-box-outer" style="margin-right: 30px;">
                             <div class="thumb-box-inner">
                                 <canvas class="thumb" width=224 height=224 id="up-thumb"></canvas>
                             </div>
@@ -132,6 +137,13 @@
                 </div><!-- ./panel-cell -->
 
                 <div class="panel-cell panel-cell-right panel-cell-fill">
+                    <div class="thumb-box">
+                        <div class="thumb-box-outer" style="opacity:0">
+                            <div class="thumb-box-inner">
+                                <canvas class="thumb" width=224 height=224 id="a2"></canvas>
+                            </div>
+                        </div>
+                    </div>
                 </div><!-- ./panel-cell -->
 
             </div><!-- /.panel-row -->
@@ -188,7 +200,7 @@
 
                 <div class="panel-cell panel-cell-center panel-cell-fill">
                     <div class="thumb-box">
-                        <div class="thumb-box-outer">
+                        <div class="thumb-box-outer" style="margin-right: 30px;">
                             <div class="thumb-box-inner">
                                 <canvas class="thumb" width=224 height=224 id="down-thumb"></canvas>
                             </div>
@@ -201,6 +213,13 @@
                 </div><!-- ./panel-cell -->
 
                 <div class="panel-cell panel-cell-right panel-cell-fill">
+                    <div class="thumb-box">
+                        <div class="thumb-box-outer" style="opacity:0">
+                            <div class="thumb-box-inner">
+                                <canvas class="thumb" width=224 height=224 id="a3"></canvas>
+                            </div>
+                        </div>
+                    </div>
                 </div><!-- ./panel-cell -->
 
             </div><!-- /.panel-row -->
@@ -240,14 +259,23 @@
     window.addEventListener("keydown", function keydown(e) {
         var keycode = e.which || window.event.keycode;
         //  Supress further processing of left/right/space (37/29/32)
-        if (keycode == 37 || keycode == 39 || keycode == 32) {
+        if (keycode == 37 || keycode == 38 || keycode == 39 || keycode == 40 || keycode == 101 || keycode == 32) {
             e.preventDefault();
         }
         if (keycode == 37) {
             game.moveToTheLeft();
         }
+        if (keycode == 38) {
+            game.moveToTheUp();
+        }
         if (keycode == 39) {
             game.moveToTheRight();
+        }
+        if (keycode == 40) {
+            game.moveToTheDown();
+        }
+        if (keycode == 101) {
+            game.moveToTheCenter();
         }
         {#game.keyDown(keycode);#}
     });

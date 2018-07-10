@@ -292,11 +292,20 @@ async function syncTensor() {
         // Update UI
         // First, stop the ship and clean previous selection
         game.keyUp(39);
-        game.keyUp(37);
+        game.keyUp(38);
+        game.keyUp(39);
+        game.keyUp(40);
+        game.keyUp(101);
         const btnLeft = document.querySelector('button#left');
         const btnRight = document.querySelector('button#right');
+        const btnUp = document.querySelector('button#up');
+        const btnDown = document.querySelector('button#down');
+        const btnCenter = document.querySelector('button#center');
         btnLeft.style.border = null;
         btnRight.style.border = null;
+        btnUp.style.border = null;
+        btnDown.style.border = null;
+        btnCenter.style.border = null;
 
         // Second, Predict using modelOperator.mobilenet and then the custom model and
         // check whether probability is higher than the threshold
@@ -318,12 +327,24 @@ async function syncTensor() {
         const borderStyle = '2px solid yellow'
         switch (pos[0]) {
             case 0:
+                game.moveToTheDown();
+                btnDown.style.border = borderStyle;
+                break;
+            case 1:
                 game.moveToTheLeft();
                 btnLeft.style.border = borderStyle;
                 break;
-            case 1:
+            case 2:
+                game.moveToTheCenter();
+                btnCenter.style.border = borderStyle;
+                break;
+            case 3:
                 game.moveToTheRight();
                 btnRight.style.border = borderStyle;
+                break;
+            case 4:
+                game.moveToTheUp();
+                btnUp.style.border = borderStyle;
                 break;
         }
         await tf.nextFrame();

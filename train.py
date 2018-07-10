@@ -92,6 +92,7 @@ def main(unused_argv):
     X_train, Y_train, X_test, Y_test = load_data("data/xs.csv", "data/ys.csv")
     train_history = train(model, X_train, Y_train, X_test, Y_test,
                           run_epochs=epochs, batch_frac=batch_fraction)
+
     print("Training completed successfully.")
 
     if FLAGS.export_js:

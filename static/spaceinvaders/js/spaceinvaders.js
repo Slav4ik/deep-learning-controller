@@ -238,6 +238,30 @@ Game.prototype.moveToTheLeft = function () {
     }
 };
 
+Game.prototype.moveToTheUp = function () {
+    let keyCode = 38;
+    this.pressedKeys[keyCode] = true;
+    if (this.currentState() && this.currentState().keyDown) {
+        this.currentState().keyDown(this, keyCode);
+    }
+};
+
+Game.prototype.moveToTheDown = function () {
+    let keyCode = 40;
+    this.pressedKeys[keyCode] = true;
+    if (this.currentState() && this.currentState().keyDown) {
+        this.currentState().keyDown(this, keyCode);
+    }
+};
+
+Game.prototype.moveToTheCenter = function () {
+    let keyCode = 101;
+    this.pressedKeys[keyCode] = true;
+    if (this.currentState() && this.currentState().keyDown) {
+        this.currentState().keyDown(this, keyCode);
+    }
+};
+
 function WelcomeState() {
 
 }
